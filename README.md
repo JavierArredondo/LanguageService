@@ -8,7 +8,7 @@ Where _code_ is a JSON, the structure is about:
 
 ```json
 {
-  "lang": "Some language",
+  "lang": "Some language (Python, C or Java)",
   "code": "Block of code"
 }
 ``` 
