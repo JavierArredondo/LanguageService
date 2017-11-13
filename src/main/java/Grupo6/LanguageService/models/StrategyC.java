@@ -19,7 +19,7 @@ public class StrategyC implements Strategy {
             try
             {
                 System.out.println("> Compiled!");
-                ProcessBuilder builder = new ProcessBuilder("a.out");
+                ProcessBuilder builder = new ProcessBuilder("./a.out");
                 Process compiler = builder.start();
 
                 BufferedReader output = new BufferedReader(new InputStreamReader(compiler.getInputStream()));
