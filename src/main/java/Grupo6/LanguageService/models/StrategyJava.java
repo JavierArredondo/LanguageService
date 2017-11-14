@@ -13,12 +13,13 @@ public class StrategyJava implements Strategy {
     {
         System.out.println("_______________________\nLang: Java");
         this.createDir();
-        boolean isCompiled = compileCode(language);
+        String javaFile = this.getNameClass(language.getCode());
+        boolean isCompiled = compileCode(language, javaFile);
         if(isCompiled)
         {
             try
             {
-                ProcessBuilder builder = new ProcessBuilder("java", "myCode");
+                ProcessBuilder builder = new ProcessBuilder("java", javaFile);
                 Process compiler = builder.start();
 
                 BufferedReader output = new BufferedReader(new InputStreamReader(compiler.getInputStream()));
@@ -55,16 +56,16 @@ public class StrategyJava implements Strategy {
         System.out.println("_______________________");
     }
 
-    private boolean compileCode(Language language)
+    private boolean compileCode(Language language, String javaFile)
     {
         boolean status = true;
         try
         {
-            BufferedWriter file = new BufferedWriter(new FileWriter("java/myCode.java"));
+            BufferedWriter file = new BufferedWriter(new FileWriter( javaFile +".java"));
             file.write(language.getCode());
             file.close();
 
-            ProcessBuilder builder = new ProcessBuilder("javac", "java/myCode.java");
+            ProcessBuilder builder = new ProcessBuilder("javac", javaFile +".java");
             Process compiler = builder.start();
 
             BufferedReader error = new BufferedReader(new InputStreamReader(compiler.getErrorStream()));
@@ -79,6 +80,22 @@ public class StrategyJava implements Strategy {
         }
         catch (Exception e){}
         return status;
+    }
+
+    private String getNameClass(String code)
+    {
+        String[] codeAux = code.split(" ");
+        int i;
+        for (i = 0; i < codeAux.length; i++)
+            if(codeAux[i].equals("class"))
+                break;
+        if(i == codeAux.length)
+            return "Error";
+        String ans = codeAux[i+1];
+        if(!ans.contains("{"))
+            return ans;
+        i = ans.indexOf("{");
+        return ans.subSequence(0, i).toString();
     }
 
     @Override
