@@ -22,4 +22,12 @@ public class LanguageController {
         }
         return new ResponseEntity<Language>(code, HttpStatus.OK);
     }
+
+    @RequestMapping(value = "/testCase", method = RequestMethod.POST)
+    @Consumes("application/json")
+    public ResponseEntity<Language> doTestCase(@RequestBody Language code){
+        code.execute();
+
+        return new ResponseEntity<Language>(code, HttpStatus.OK);
+    }
 }
