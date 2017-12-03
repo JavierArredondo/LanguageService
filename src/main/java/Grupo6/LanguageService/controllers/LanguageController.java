@@ -13,21 +13,6 @@ public class LanguageController {
     @Consumes("application/json")
     public ResponseEntity<Language> compileCode(@RequestBody Language code){
         code.execute();
-
-        if(code.getError().size() == 0){
-            code.setStatusCode(1);
-        }
-        else{
-            code.setStatusCode(0);
-        }
-        return new ResponseEntity<Language>(code, HttpStatus.OK);
-    }
-
-    @RequestMapping(value = "/testCase", method = RequestMethod.POST)
-    @Consumes("application/json")
-    public ResponseEntity<Language> doTestCase(@RequestBody Language code){
-        code.execute();
-
         return new ResponseEntity<Language>(code, HttpStatus.OK);
     }
 }
