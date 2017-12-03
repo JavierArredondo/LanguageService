@@ -54,7 +54,7 @@ public class StrategyPython implements Strategy {
             }
             else
                 language.setStatusCode(1);
-            
+
             language.setError(errors);
             language.setOutput(outputs);
         }
