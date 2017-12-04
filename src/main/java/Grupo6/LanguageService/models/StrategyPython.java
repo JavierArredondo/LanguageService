@@ -46,14 +46,14 @@ public class StrategyPython implements Strategy {
                 System.out.println(err);
             }
 
-            if(errors.size() != 0)
+            if(errors.size() == 0)
             {
-                language.setStatusCode(0);
-                if(errors.size() == 0 && language.getP1() != null && language.getP2() != null && language.getP3() != null)
+                language.setStatusCode(1);
+                if(language.getP1() != null && language.getP2() != null && language.getP3() != null)
                     this.executeTestCase(language);
             }
             else
-                language.setStatusCode(1);
+                language.setStatusCode(0);
 
             language.setError(errors);
             language.setOutput(outputs);
@@ -83,6 +83,7 @@ public class StrategyPython implements Strategy {
 
     private void executeTestCase(Language language)
     {
+        System.out.println("hola");
         List<String> testCases = new ArrayList<String>();
         try {
             file = new BufferedWriter(new FileWriter("python/testCode.py"));
