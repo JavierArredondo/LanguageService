@@ -11,8 +11,13 @@ import javax.ws.rs.Consumes;
 public class LanguageController {
     @RequestMapping(value = "/code", method = RequestMethod.POST)
     @Consumes("application/json")
-    public ResponseEntity<Language> compileCode(@RequestBody Language code){
+    /*public ResponseEntity<Language> compileCode(@RequestBody Language code){
         code.execute();
         return new ResponseEntity<Language>(code, HttpStatus.OK);
+    }*/
+    public void compileCode(@RequestBody Object o)
+    {
+        System.out.print(o.toString());
+
     }
 }
